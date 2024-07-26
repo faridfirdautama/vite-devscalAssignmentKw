@@ -62,18 +62,22 @@ async function app() {
     // Delete row
     delBtn.addEventListener("click", async () => {
       const id = task._id;
-      try {
-        await fetch(URL_API, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify([{ id }]),
-        });
-      } catch (error) {
-        console.log(error);
-      } finally {
-        window.location.reload();
+      if (window.confirm("Yakin?\n ntar nyesel lho...") === true) {
+        //
+        try {
+          await fetch(URL_API, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify([{ id }]),
+          });
+        } catch (error) {
+          console.log(error);
+        } finally {
+          window.location.reload();
+        }
+        return;
       }
     });
 
