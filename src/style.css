@@ -105,9 +105,13 @@ button:focus-visible {
   margin-top: 20px;
 }
 
-.app-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+#app-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-header {
+  margin: auto 0;
 }
 
 .card-content {
@@ -122,7 +126,7 @@ button:focus-visible {
 }
 
 .card-content h2 {
-  margin: 20px 0 0 0;
+  margin: 10px 0 0 0;
   padding: 0;
 }
 
@@ -130,7 +134,7 @@ button:focus-visible {
   margin: 0 0 20px 0;
   padding: 5px 0;
   font-size: 12px;
-  color: gray;
+  color: #696363;
 }
 
 .card-content h4 {
@@ -148,7 +152,7 @@ button:focus-visible {
   margin-right: 15px;
   padding: 5px 10px;
   color: #000;
-  font-size: 95%;
+  font-size: 80%;
 }
 
 /* MODAL */
