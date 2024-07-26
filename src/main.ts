@@ -38,23 +38,41 @@ async function app() {
     cards?.append(cardTitle, cardBatch, cardUrlLink);
 
     if (task.githublink?.length !== 0) {
-      cardGithubLink.href = task.githublink; //github;
+      cardGithubLink.href = task.githublink as string | ""; //github;
       cardGithubLink.textContent = "Assignment Github Url Link";
       cards?.appendChild(cardGithubLink);
     } else {
-      //
       cardGithubLink.remove();
     }
     if (task.notes?.length !== 0) {
-      cardNotes.textContent = task.notes;
+      cardNotes.textContent = task.notes as string | "";
       cards?.appendChild(cardNotes);
     } else {
-      //
       cardNotes.remove();
     }
 
     cards.appendChild(delBtn);
     cardContent?.append(cards);
+
+    // Delete row
+    delBtn.addEventListener("click", async () => {
+      //
+      const id = task._id;
+      try {
+        //
+        await fetch(URL_API, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify([{ id }]),
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        window.location.reload();
+      }
+    });
   });
 }
 app();
@@ -75,7 +93,6 @@ const modalContainer = document.getElementById("modal-container");
 const overlay = document.getElementById("overlay");
 
 createBtn?.addEventListener("click", () => {
-  //cards?.classList.add("hidden");
   modalContainer?.classList.remove("hidden");
   overlay?.classList.remove("hidden");
 });
