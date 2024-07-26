@@ -24,7 +24,9 @@ async function app() {
     const cardUrlLink = document.createElement("a");
     const cardGithubLink = document.createElement("a");
     const cardNotes = document.createElement("p");
+    const btnWrapper = document.createElement("div");
     const delBtn = document.createElement("button");
+    const editBtn = document.createElement("button");
 
     // set
     cards.classList.add("card-content");
@@ -32,13 +34,14 @@ async function app() {
     cardBatch.textContent = task.batch;
     cardUrlLink.href = task.urllink;
     cardUrlLink.textContent = "Assignment Url Link";
-    delBtn.classList.add("del-btn");
+    delBtn.classList.add("red-btn");
     delBtn.textContent = "Delete";
+    editBtn.textContent = "Edit";
 
     cards?.append(cardTitle, cardBatch, cardUrlLink);
 
     if (task.githublink?.length !== 0) {
-      cardGithubLink.href = task.githublink as string | ""; //github;
+      cardGithubLink.href = task.githublink as string | "";
       cardGithubLink.textContent = "Assignment Github Url Link";
       cards?.appendChild(cardGithubLink);
     } else {
@@ -51,15 +54,15 @@ async function app() {
       cardNotes.remove();
     }
 
-    cards.appendChild(delBtn);
+    btnWrapper.classList.add("btn-wrapper");
+    btnWrapper.append(editBtn, delBtn);
+    cards.append(btnWrapper);
     cardContent?.append(cards);
 
     // Delete row
     delBtn.addEventListener("click", async () => {
-      //
       const id = task._id;
       try {
-        //
         await fetch(URL_API, {
           method: "DELETE",
           headers: {
@@ -73,6 +76,52 @@ async function app() {
         window.location.reload();
       }
     });
+
+    // Edit row
+    editBtn.addEventListener("click", () => {
+      modalContainer?.classList.remove("hidden");
+      overlay?.classList.remove("hidden");
+
+      inputTitle.value = task.title;
+      inputUrlLink.value = task.urllink;
+      inputGithubLink.value = task.githublink as string | "";
+      inputNotes.value = task.notes as string | "";
+
+      submitBtn?.classList.add("hidden");
+      updateBtn?.classList.remove("hidden");
+    });
+
+    // Update
+    updateBtn?.addEventListener("click", async () => {
+      const id = task._id;
+      const title = inputTitle.value;
+      const batch = inputOpt.value;
+      const urllink = inputUrlLink.value;
+      const githublink = inputGithubLink.value;
+      const notes = inputNotes.value;
+
+      try {
+        await fetch(URL_API, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            _id: id,
+            title: title,
+            batch: batch,
+            urllink: urllink,
+            githublink: githublink,
+            notes: notes,
+          }),
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        window.location.reload();
+      }
+      Close();
+    });
   });
 }
 app();
@@ -80,6 +129,8 @@ app();
 // Insert new row
 const createBtn = document.getElementById("createBtn");
 const submitBtn = document.getElementById("submitBtn");
+const updateBtn = document.getElementById("updateBtn");
+const closeBtn = document.getElementById("closeBtn");
 const inputTitle = document.getElementById("inputTitle") as HTMLInputElement;
 const inputOpt = document.getElementById("inputOpt") as HTMLOptionElement;
 const inputUrlLink = document.getElementById(
@@ -118,6 +169,26 @@ submitBtn?.addEventListener("click", async () => {
     window.location.reload();
   }
 
-  modalContainer?.classList.add("hidden");
-  overlay?.classList.add("hidden");
+  Close();
+});
+
+// Close modal function
+function Close() {
+  if (
+    !modalContainer?.classList.contains("hidden") &&
+    !overlay?.classList.contains("hidden")
+  ) {
+    modalContainer?.classList.add("hidden");
+    overlay?.classList.add("hidden");
+  }
+}
+
+closeBtn?.addEventListener("click", () => {
+  Close();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    Close();
+  }
 });

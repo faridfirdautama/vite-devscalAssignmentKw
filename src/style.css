@@ -101,6 +101,10 @@ button:focus-visible {
   margin: 0;
 }
 
+.mt-20 {
+  margin-top: 20px;
+}
+
 .app-header {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -193,9 +197,9 @@ button:focus-visible {
   gap: 15px;
 }
 
-.del-btn {
+.red-btn {
   background-color: #ff0000;
-  margin-bottom: 20px;
+  margin-left: 10px;
 }
 
 ::placeholder {
@@ -216,6 +220,10 @@ button:focus-visible {
   font-size: 15px;
 }
 #submitBtn {
+  margin: 20px 0;
+}
+
+.btn-wrapper {
   margin: 20px 0;
 }
 
