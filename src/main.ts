@@ -1,24 +1,44 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import "./style.css";
+import { fetchData } from "../libs/fetch.ts";
+import { ITaskResult } from "../types/entity.ts";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const URL_API = "https://v1.appbackend.io/v1/rows/eWsCV4wiJ0Wx";
+const cardContent = document.getElementById("app-content");
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+async function app() {
+  // fetch
+  const tasks = await fetchData<ITaskResult>(URL_API);
+
+  // iterate
+  tasks?.data.map((task) => {
+    // call
+    const cards = document.createElement("div");
+    const cardTitle = document.createElement("h2");
+    const cardBatch = document.createElement("h4");
+    const cardUrlLink = document.createElement("a");
+    const cardGithubLink = document.createElement("a");
+    const cardNotes = document.createElement("p");
+
+    // set
+    cardTitle.textContent = task.title;
+    cardBatch.textContent = task.batch;
+    cardUrlLink.href = task.url_link;
+    cardUrlLink.textContent = "Assignment Link";
+
+    cards.classList.add("card-content");
+    cards?.append(cardTitle, cardBatch, cardUrlLink);
+
+    if (task.github_link !== undefined) {
+      cardGithubLink.href = task.github_link;
+      cardGithubLink.textContent = "Assignment Github Link";
+      cards?.appendChild(cardGithubLink);
+    }
+    if (task.notes !== undefined) {
+      cardNotes.textContent = task.notes;
+      cards?.appendChild(cardNotes);
+    }
+
+    cardContent?.appendChild(cards);
+  });
+}
+app();
