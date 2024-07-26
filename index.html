@@ -8,14 +8,59 @@
   </head>
   <body>
     <div id="app">
+      <!-- content -->
       <div id="app-header">
-        <div>
-          <h1>Assignments</h1>
-          <p>Here is all your assignments</p>
+        <div class="header-sub">
+          <h1 class="md-0">Assignments</h1>
+          <p class="md-0">Here is all your assignments</p>
         </div>
         <button id="createBtn" type="">Submit Assignments</button>
       </div>
       <div id="app-content"></div>
+
+      <!-- modal -->
+      <section id="modal-container" class="modal-container hidden">
+        <div class="modal">
+          <div class="header-sub">
+            <h1 class="md-0">Submit Assignment</h1>
+            <p class="md-0">Please Submit your assignment</p>
+          </div>
+          <div class="task-container">
+            <input
+              type="text"
+              id="inputTitle"
+              class="inp"
+              placeholder="Assignment number..."
+            />
+            <select id="inputOpt" class="inp font-bold">
+              <option>Fullstack MERN bootcamp - 12 Week - Batch 2</option>
+            </select>
+            <input
+              type="text"
+              id="inputUrlLink"
+              class="inp"
+              placeholder="Assignment Url link..."
+            />
+            <input
+              type="text"
+              id="inputGithubLink"
+              class="inp"
+              placeholder="Assignment Github url link..."
+            />
+            <textarea
+              rows=""
+              cols=""
+              id="inputNotes"
+              class="inp"
+              placeholder="Assignment notes.."
+            ></textarea>
+          </div>
+          <button id="submitBtn">Submit</button>
+        </div>
+      </section>
+
+      <!-- overlay -->
+      <div id="overlay" class="overlay hidden"></div>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
