@@ -3,7 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light; /* dark;*/
+  color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
@@ -34,7 +34,8 @@ body {
   border: none;
   padding: 15px;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: #333a48;
+  color: #fff;
 }
 
 .font-bold {
@@ -81,12 +82,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #333a48;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #fff;
 }
 button:focus,
 button:focus-visible {
@@ -121,8 +122,8 @@ button:focus-visible {
   width: 700px;
   margin: 20px auto;
   text-align: left;
-  background-color: #ffffff;
-  border: 1px solid #d4d4d6;
+  background-color: #000;
+  border: 1px solid #7e6363;
   padding: 5px 25px;
   border-radius: 20px;
 }
@@ -136,7 +137,7 @@ button:focus-visible {
   margin: 0 0 20px 0;
   padding: 5px 0;
   font-size: 12px;
-  color: #696363;
+  color: #a87c7c;
 }
 
 .card-content h4 {
@@ -148,13 +149,18 @@ button:focus-visible {
 
 .card-content a {
   display: inline-flex;
-  border: 1px solid #d4d4d6;
+  border: 1px solid #7e6363;
   border-radius: 10px;
   text-decoration: none;
   margin-right: 15px;
   padding: 5px 10px;
-  color: #000;
+  color: #fff;
   font-size: 80%;
+  transition: border-color 0.25s;
+}
+
+.card-content a:hover {
+  border-color: #fff;
 }
 
 /* MODAL */
@@ -171,7 +177,7 @@ button:focus-visible {
 }
 
 .modal {
-  background-color: whitesmoke;
+  background-color: #242424;
   border-radius: 10px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
   width: 500px;
@@ -204,7 +210,7 @@ button:focus-visible {
 }
 
 .red-btn {
-  background-color: #ff0000;
+  background-color: #872341;
   margin-left: 10px;
 }
 
@@ -222,7 +228,7 @@ button:focus-visible {
     "Helvetica Neue",
     sans-serif;
 
-  opacity: 0.5;
+  opacity: 0.7;
   font-size: 15px;
 }
 #submitBtn {
@@ -238,11 +244,47 @@ button:focus-visible {
     color: #213547;
     background-color: #fff8f3;
   }
+
   a:hover {
-    border: 1px solid #747bff;
+    color: #747bff;
   }
+
   button {
-    background-color: #443bc9;
+    background-color: #535bf2;
     color: #fff;
+  }
+
+  button:hover {
+    border-color: #fff;
+  }
+
+  .card-content {
+    background-color: #fff;
+  }
+
+  .card-content a {
+    border-color: #b9b4c7;
+    color: #000;
+  }
+
+  .card-content p {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .card-content a:hover {
+    border-color: #747bff;
+  }
+
+  .modal {
+    background-color: rgba(255, 255, 255, 0.87);
+  }
+
+  .inp {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .red-btn {
+    background-color: red;
   }
 }
