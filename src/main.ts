@@ -193,6 +193,7 @@ function Close() {
 
 closeBtn?.addEventListener("click", () => {
   Close();
+  window.location.reload();
 });
 
 document.addEventListener("keydown", (e) => {
