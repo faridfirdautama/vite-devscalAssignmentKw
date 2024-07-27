@@ -62,7 +62,7 @@ async function app() {
     // Delete row
     delBtn.addEventListener("click", async () => {
       const id = task._id;
-      if (window.confirm("Yakin?\n ntar nyesel lho...") === true) {
+      if (window.confirm("Yakin?\nNtar nyesel lho...") === true) {
         //
         try {
           await fetch(URL_API, {
@@ -83,6 +83,8 @@ async function app() {
 
     // Edit row
     editBtn.addEventListener("click", () => {
+      const id = task._id;
+      console.log(`ID: ${id}`);
       modalContainer?.classList.remove("hidden");
       overlay?.classList.remove("hidden");
 
@@ -93,38 +95,40 @@ async function app() {
 
       submitBtn?.classList.add("hidden");
       updateBtn?.classList.remove("hidden");
-    });
+      //});
 
-    // Update
-    updateBtn?.addEventListener("click", async () => {
-      const id = task._id;
-      const title = inputTitle.value;
-      const batch = inputOpt.value;
-      const urllink = inputUrlLink.value;
-      const githublink = inputGithubLink.value;
-      const notes = inputNotes.value;
+      // Update
+      updateBtn?.addEventListener("click", async () => {
+        const title = inputTitle.value;
+        const batch = inputOpt.value;
+        const urllink = inputUrlLink.value;
+        const githublink = inputGithubLink.value;
+        const notes = inputNotes.value;
 
-      try {
-        await fetch(URL_API, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            _id: id,
-            title: title,
-            batch: batch,
-            urllink: urllink,
-            githublink: githublink,
-            notes: notes,
-          }),
-        });
-      } catch (error) {
-        console.log(error);
-      } finally {
-        window.location.reload();
-      }
-      Close();
+        try {
+          await fetch(URL_API, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              _id: id,
+              title: title,
+              batch: batch,
+              urllink: urllink,
+              githublink: githublink,
+              notes: notes,
+            }),
+          });
+        } catch (error) {
+          console.log(error);
+        } finally {
+          window.location.reload();
+        }
+        Close();
+        submitBtn?.classList.remove("hidden");
+        updateBtn?.classList.add("hidden");
+      });
     });
   });
 }

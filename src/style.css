@@ -108,6 +108,8 @@ button:focus-visible {
 #app-header {
   display: flex;
   justify-content: space-between;
+  min-width: 600px;
+  width: 100%;
 }
 
 .btn-header {
