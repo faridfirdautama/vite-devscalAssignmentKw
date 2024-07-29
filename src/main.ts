@@ -57,7 +57,7 @@ async function app() {
     btnWrapper.classList.add("btn-wrapper");
     btnWrapper.append(editBtn, delBtn);
     cards.append(btnWrapper);
-    cardContent?.append(cards);
+    cardContent?.prepend(cards);
 
     // Delete row
     delBtn.addEventListener("click", async () => {
